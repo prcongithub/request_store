@@ -19,11 +19,13 @@ module RequestStore
       response = @app.call(env)
 
       returned = response << Rack::BodyProxy.new(response.pop) do
+        puts "******************* RequestStore Middleware: Call *******************"
         RequestStore.end!
         RequestStore.clear!
       end
     ensure
       unless returned
+        puts "******************* RequestStore Middleware: Ensure *******************"
         RequestStore.end!
         RequestStore.clear!
       end

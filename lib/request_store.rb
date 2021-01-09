@@ -2,6 +2,7 @@ require "request_store/version"
 require "request_store/middleware"
 require "request_store/railtie" if defined?(Rails::Railtie)
 
+puts "Loading RequestStore"
 module RequestStore
   def self.store
     Thread.current[:request_store] ||= {}
@@ -12,6 +13,7 @@ module RequestStore
   end
 
   def self.clear!
+    puts "******************* Clearing RequestStore *******************"
     Thread.current[:request_store] = {}
   end
 
